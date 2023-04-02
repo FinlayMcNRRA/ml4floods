@@ -454,7 +454,7 @@ def download_permanent_water(area_of_interest: Polygon, date_search:datetime,
     else:
         name_for_desc = name_task
 
-    filename = os.path.join(path_no_bucket_name, f"{year}")
+    filename = os.path.join(path_no_bucket_name, f"{year}").replace("\\", "/")
     desc = f"{name_for_desc}_{year}"
 
     export_task_fun_img = export_task_image(
