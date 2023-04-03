@@ -604,6 +604,10 @@ def add_permanent_water_to_floodmap(jrc_vectorized_map:gpd.GeoDataFrame, floodma
         return floodmap
 
     jrc_vectorized_map_copy["class"] = water_class
+    
+    if floodmap.crs != jrc_vectorized_map_copy.crs:
+        crs = floodmap.crs
+        jrc_verctorized_map_copy.to_crs(crs, inplace = True)
 
     floodmap = pd.concat([floodmap, jrc_vectorized_map_copy], ignore_index=True)
     floodmap = floodmap.dissolve(by="class").reset_index()
